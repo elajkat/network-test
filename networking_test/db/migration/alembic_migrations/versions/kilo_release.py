@@ -1,4 +1,4 @@
-# All Rights Reserved.
+# All Rights Reserved 2017
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,9 +12,17 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-FOO = "FOO"
-foo = "foo"
-FOOS = "foos"
+"""kilo
+Revision ID: kilo
+Revises: None
+Create Date: 2017-12-06 00:00:00.000000
+"""
 
-FOO_SERVICE_PLUGIN = "Neutron Foo Service Plugin"
-FOO_RESOURCE = 'foo'
+# revision identifiers, used by Alembic.
+revision = 'kilo'
+down_revision = None
+
+
+def upgrade():
+    """A no-op migration for marking the Kilo release."""
+    pass

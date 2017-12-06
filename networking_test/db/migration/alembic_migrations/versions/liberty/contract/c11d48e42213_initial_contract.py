@@ -1,4 +1,4 @@
-# All Rights Reserved.
+# Copyright 2017 OpenStack Foundation
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -11,10 +11,20 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+#
 
-FOO = "FOO"
-foo = "foo"
-FOOS = "foos"
+"""initial contract
 
-FOO_SERVICE_PLUGIN = "Neutron Foo Service Plugin"
-FOO_RESOURCE = 'foo'
+Revision ID: c11d48e42213
+Revises: kilo
+Create Date: 2017-12-06 13:13:32.599135
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = 'c11d48e42213'
+down_revision = 'kilo'
+
+
+def upgrade():
+    pass

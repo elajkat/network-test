@@ -1,5 +1,3 @@
-# All Rights Reserved.
-#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -12,9 +10,27 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-FOO = "FOO"
-foo = "foo"
-FOOS = "foos"
+"""${message}
 
-FOO_SERVICE_PLUGIN = "Neutron Foo Service Plugin"
-FOO_RESOURCE = 'foo'
+Revision ID: ${up_revision}
+Revises: ${down_revision | comma,n}
+Create Date: ${create_date}
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = ${repr(up_revision)}
+down_revision = ${repr(down_revision)}
+branch_labels = ${repr(branch_labels)}
+depends_on = ${repr(depends_on)}
+
+from alembic import op
+import sqlalchemy as sa
+${imports if imports else ""}
+
+def upgrade():
+    ${upgrades if upgrades else "pass"}
+
+
+def downgrade():
+    ${downgrades if downgrades else "pass"}

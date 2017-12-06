@@ -1,4 +1,4 @@
-# All Rights Reserved.
+# All Rights Reserved 2017
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,9 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-FOO = "FOO"
-foo = "foo"
-FOOS = "foos"
+from neutron_lib import exceptions
 
-FOO_SERVICE_PLUGIN = "Neutron Foo Service Plugin"
-FOO_RESOURCE = 'foo'
+
+class FooNotFound(exceptions.NotFound):
+    message = _("Foo %(foo_id)s could not be found")

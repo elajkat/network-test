@@ -14,31 +14,55 @@
 
 from oslo_log import log as logging
 
-from networking_test.extensions import foo
+from neutron_lib.plugins import directory
+
+from neutron.services import service_base
+
+from networking_test.db.foo import foo_db
+from networking_test.services.foo.common import constants
 
 LOG = logging.getLogger(__name__)
 
 
-class FooPlugin(foo.FooPluginBase):
+class FooPlugin(foo_db.FooMixin):
     """Implementation of the Neutron foo Service Plugin."""
 
     supported_extension_aliases = ["foo"]
 
     def __init__(self):
-        pass
+        super(FooPlugin, self).__init__()
 
-    def get_foos(self, context, filters=None, fields=None):
-        LOG.debug("networking-test: get_foos")
-        return ()
+    def _load_drivers(self):
+        """Loads plugin-drivers specified in configuration."""
+        self.drivers, self.default_provider = service_base.load_drivers(
+            'FOO', self)
 
-    def get_foo(self, context, service_id, fields=None):
-        LOG.debug("networking-test: get_foo")
+    @property
+    def _core_plugin(self):
+        return directory.get_plugin()
 
-    def create_foo(self, context, service):
+    def get_plugin_type(self):
+        """Get type of the plugin."""
+        return constants.FOO
+
+    def get_plugin_description(self):
+        """Get description of the plugin."""
+        return constants.FOO_SERVICE_PLUGIN
+
+    def create_foo(self, context, foo):
         LOG.debug("networking-test: create_foo")
+        with context.session.begin(subtransactions=True):
+            foo_instance = super(FooPlugin, self).create_foo(context, foo)
+        return foo_instance
 
-    def update_foo(self, context, service_id, service):
+    def update_foo(self, context, foo_id, foo):
         LOG.debug("networking-test: update_foo")
+        with context.session.begin(subtransactions=True):
+            foo_instance = super(FooPlugin, self).update_foo(context, foo_id,
+                                                             foo)
+        return foo_instance
 
-    def delete_foo(self, context, service_id):
+    def delete_foo(self, context, foo_id):
         LOG.debug("networking-test: delete_foo")
+        with context.session.begin(subtransactions=True):
+            super(FooPlugin, self).delete_foo(context, foo_id)
